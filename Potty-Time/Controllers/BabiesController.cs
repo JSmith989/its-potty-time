@@ -21,7 +21,7 @@ namespace Potty_Time.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllActivities()
+        public IActionResult GetAllBabies()
         {
             return Ok(_repo.GetAll());
         }
@@ -59,7 +59,7 @@ namespace Potty_Time.Controllers
             return Ok(baby);
         }
 
-        [HttpDelete("{activityId}")]
+        [HttpDelete("{babyId}")]
         public IActionResult DeleteBaby(int babyId)
         {
             _repo.Remove(babyId);

@@ -43,9 +43,9 @@ namespace Potty_Time.DataAccess
 
             using var db = new SqlConnection(ConnectionString);
 
-            var animal = db.QueryFirstOrDefault<Activity>(sql, new { id = id });
+            var activity = db.QueryFirstOrDefault<Activity>(sql, new { id = id });
 
-            return animal;
+            return activity;
         }
 
         public void Update(Activity activity)
@@ -68,9 +68,17 @@ namespace Potty_Time.DataAccess
 
         public void Remove(int id)
         {
-            var sql = @"Delete 
-                        from Activities 
-                        where Id = @id";
+            var sql = @"UPDATE Activities
+                        SET
+                        ActivityType = NULL,
+						[Date] = NULL,
+						Rating = NULL,
+						ImageUrl = NULL,
+						[Description] = 'Deleted',
+						isAllergy = NULL,
+						MealType = NULL,
+						ChildId = NULL
+                        WHERE Id = @id";
 
             using var db = new SqlConnection(ConnectionString);
 

@@ -67,9 +67,16 @@ namespace Potty_Time.DataAccess
 
         public void Remove(int id)
         {
-            var sql = @"Delete 
-                        from Babies 
-                        where Id = @id";
+            var sql = @"UPDATE Babies
+                        SET
+                        FirstName = 'Deleted',
+						LastName = NULL,
+						ImageUrl = NULL,
+						Birthday = NULL,
+						UserId = NULL,
+						Age = NULL,
+                        [Description] = NULL
+                        WHERE Id = @id";
 
             using var db = new SqlConnection(ConnectionString);
 

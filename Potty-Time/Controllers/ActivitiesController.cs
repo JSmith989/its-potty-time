@@ -27,10 +27,10 @@ namespace Potty_Time.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddAnAnimal(Activity activity)
+        public IActionResult AddAnActivity(Activity activity)
         {
             _repo.Add(activity);
-            return Created($"api/Animals/{activity.Id}", activity);
+            return Created($"api/Activities/{activity.Id}", activity);
         }
 
         [HttpGet("{id}")]
@@ -48,7 +48,7 @@ namespace Potty_Time.Controllers
 
         [HttpPut("{id}/update")]
         
-        public IActionResult UpdateEvent(Activity activity)
+        public IActionResult UpdateActivity(Activity activity)
         {
             if (activity == null)
             {
@@ -60,7 +60,7 @@ namespace Potty_Time.Controllers
         }
 
         [HttpDelete("{activityId}")]
-        public IActionResult DeleteAnimal(int activityId)
+        public IActionResult DeleteActivity(int activityId)
         {
             _repo.Remove(activityId);
 
