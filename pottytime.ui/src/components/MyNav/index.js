@@ -21,7 +21,7 @@ const Example = () => {
   return (
     <div>
       <Navbar light expand="md" className=" elNav justify-content-between">
-        <NavbarBrand className="navTitle" href="/"><i className="fas fa-baby"></i> <i className="navName">It&apos;s Potty Time</i></NavbarBrand>
+        <NavbarBrand className="navTitle" href="/"> <p className="navName"><i className="fas fa-baby fa-xs"></i> It&apos;s Potty Time</p></NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar className="links">
           <Nav className=" mr-auto" navbar>

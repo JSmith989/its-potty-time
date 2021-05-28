@@ -5,7 +5,7 @@ import {
   Button, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
 
-const ModalExample = (props) => {
+const AppModal = (props) => {
   const {
     buttonLabel,
     className,
@@ -18,7 +18,7 @@ const ModalExample = (props) => {
   const toggle = () => setModal(!modal);
 
   return (
-    <div>
+    <>
       <button className={btnStyle} onClick={toggle}>{buttonLabel}</button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>{title}</ModalHeader>
@@ -29,8 +29,8 @@ const ModalExample = (props) => {
           <Button color="secondary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
-    </div>
+    </>
   );
 };
 
-export default ModalExample;
+export default AppModal;
