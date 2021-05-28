@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.scss';
+import MyNav from '../components/MyNav';
 
 function App() {
   return (
     <div className='App'>
-      <h2>INSIDE APP COMPONENT</h2>
-      <button className='btn btn-info'>I am a button</button>
+      <MyNav />
     </div>
   );
 }
