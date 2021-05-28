@@ -1,16 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getUserById } from '../../helpers/data/userData';
+import getUid from '../../helpers/data/authData';
 
-export default function index() {
+const Profile = () => {
+  const [user, setUser] = useState([]);
+
+  const getUser = (userId) => {
+    getUserById(userId).then((response) => {
+      setUser(response);
+    })
+      .catch((err) => console.warn('get user did not work', err));
+  };
+
+  useEffect(() => {
+    const userId = getUid();
+    if (userId) {
+      getUser(userId);
+    }
+  }, [user]);
   return (
     <div className="yourProfile">
     <div className="card">
         <div className="second d-flex flex-row">
-            <div> <img className="image" src="https://lh3.googleusercontent.com/a-/AOh14GgMbMP3HIo-7hnh4cOoP-xJyjcyR5DfB_a6L8Kf=s96-c" /> </div>
-                <div className="about d-flex flex-column"> <h2 className="yourName">Your Name</h2>
-                <div className="description"> <p>info about the stuff is going to go here once i get the stuff going on this stuff</p></div>
+            <div> <img className="image" src={user.imageUrl} /> </div>
+                <div className="about d-flex flex-column"> <h2 className="yourName">{user.firstName} {user.lastName}</h2>
+                <div className="description"> <p>{user.description}</p></div>
                 </div>
         </div>
     </div>
 </div>
   );
-}
+};
+
+export default Profile;
