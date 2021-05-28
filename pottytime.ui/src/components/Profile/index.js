@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getUserById } from '../../helpers/data/userData';
 import getUid from '../../helpers/data/authData';
+import Modal from '../Modal';
+import AddDescription from '../Forms/AddDescription';
 
 const Profile = () => {
   const [user, setUser] = useState([]);
@@ -11,6 +13,13 @@ const Profile = () => {
     })
       .catch((err) => console.warn('get user did not work', err));
   };
+
+  const addDescription = () => <Modal title={'Add Description'} btnStyle={'add-desc'} buttonLabel={'Add Description'}>
+      <AddDescription
+        user={user}
+        key={user.id}
+      />
+    </Modal>;
 
   useEffect(() => {
     const userId = getUid();
@@ -24,7 +33,7 @@ const Profile = () => {
         <div className="second d-flex flex-row">
             <div> <img className="image" src={user.imageUrl} /> </div>
                 <div className="about d-flex flex-column"> <h2 className="yourName">{user.firstName} {user.lastName}</h2>
-                <div className="description"> <p>{user.description}</p></div>
+                <div className="description"> <p>{user.description ? user.description : addDescription()}</p></div>
                 </div>
         </div>
     </div>

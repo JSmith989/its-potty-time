@@ -57,12 +57,22 @@ namespace Potty_Time.DataAccess
                             LastName = @LastName,
 	                        Email = @Email,
 	                        ImageUrl = @ImageUrl,
-                            [Description] = @Description,
-                            @FirebaseId = @FirebaseId
+                            [Description] = @Description
                         WHERE Id = @id";
 
             db.Execute(sql, user);
         }
-        
+
+        public void UpdateDescription(User user)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE Users
+                        SET [Description] = @Description
+                        WHERE Id = @id";
+
+            db.Execute(sql, user);
+        }
+
     }
 }
