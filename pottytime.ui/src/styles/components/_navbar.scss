@@ -1,0 +1,27 @@
+.elNav {
+     border-bottom: 2px solid black;
+     font-family: 'Damion', cursive;
+     font-size: 23px;
+}
+
+.links {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 5%;
+}
+
+.fa-baby {
+    border: 2px solid black;
+    padding: 2px;
+    border-radius: 13px;
+    background-color: $favColor;
+}
+
+.navTitle {
+    padding-left: 5%;
+}
+
+.navName {
+    padding-left: 7%;
+    font-size: 28px;
+}
