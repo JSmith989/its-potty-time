@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import { useHistory } from 'react-router-dom';
 import Auth from '../components/Auth';
+import Profile from '../components/Profile';
 
 export default function Home({ user }) {
   const history = useHistory();
@@ -30,14 +31,19 @@ export default function Home({ user }) {
   };
 
   return (
-    <div>
-      <div className='login'>
-      {loadComponent()}
-      </div>
-      <div>
-      {loadLogout()}
-      </div>
-    </div>
+    <>{user ? (
+        <div>
+            {loadLogout()}
+            <div className="yourProfile">
+            <Profile />
+            </div>
+        </div>
+    ) : (
+        <div className='login'>
+            {loadComponent()}
+        </div>
+    )}
+    </>
   );
 }
 
