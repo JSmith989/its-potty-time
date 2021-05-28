@@ -1,0 +1,42 @@
+.yourProfile {
+    display: flex;
+    justify-content: flex-start;
+    padding: 2px;
+    font-family: Arial, Helvetica, sans-serif;
+
+.card {
+    width: 400px;
+    background-color: rgb(214, 214, 241);
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.heading {
+    font-weight: 700
+}
+
+
+.yourName {
+    font-family: 'Damion', cursive;
+    padding: 10px;
+}
+
+
+.image {
+    border-radius: 20px;
+    width: 100%;
+    height: auto;
+}
+
+.about {
+    padding: 4px;
+    margin-left: 10%;
+}
+
+.description {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 200px;
+}
+
+}
