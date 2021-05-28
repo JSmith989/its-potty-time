@@ -30,8 +30,8 @@ export default class Auth extends Component {
     render() {
       return (
       <div className="Auth d-flex justify-content-center">
-        <button className="btn" onClick={this.loginClickEvent}>
-          <img src='https://www.socialmedianews.com.au/wp-content/uploads/2013/02/googleplussignin.png' alt="Google Sign In Button" />
+        <button className="login-button" onClick={this.loginClickEvent}>
+          Sign In
         </button>
       </div>
       );

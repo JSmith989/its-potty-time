@@ -17,16 +17,25 @@ export default function Home({ user }) {
     let component = '';
     if (!user) {
       component = <Auth />;
-    } else if (user) {
-      component = <div className="logout-button"><button className='nav-link btn btn-danger' onClick={(e) => logMeOut(e)}>Logout</button></div>;
+    }
+    return component;
+  };
+
+  const loadLogout = () => {
+    let component = '';
+    if (user) {
+      component = <div className="logout"><button className='logout-button' onClick={(e) => logMeOut(e)}>Log Out</button></div>;
     }
     return component;
   };
 
   return (
     <div>
-      <div className='login-button'>
+      <div className='login'>
       {loadComponent()}
+      </div>
+      <div>
+      {loadLogout()}
       </div>
     </div>
   );
