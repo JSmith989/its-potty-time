@@ -13,4 +13,5 @@ const getUserById = (userId) => new Promise((resolve, reject) => {
 const updateUser = (userId, updatedUser) => axios.put(`${usersUrl}/${userId}/update`, updatedUser);
 
 const updateDescription = (userId, updatedUser) => axios.put(`${usersUrl}/${userId}/description`, updatedUser);
+
 export { getUserById, updateUser, updateDescription };
