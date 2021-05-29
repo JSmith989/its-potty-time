@@ -84,5 +84,18 @@ namespace Potty_Time.DataAccess
 
             db.Execute(sql, new { id });
         }
+
+        public Activity BabyPooped(Activity activity)
+        {
+            var sql = @"Insert into Activities(ActivityType, [Date], MealType, ChildId)
+                        output inserted.*
+                        values (0, GETDATE(), 3, @ChildId)";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var newActivity = db.QueryFirst<Activity>(sql, activity);
+
+            return newActivity;
+        }
     }
 }

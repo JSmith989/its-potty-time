@@ -30,6 +30,7 @@ namespace Potty_Time.Models
     {
         Vegetable,
         Fruit,
-        Meat
+        Meat,
+        Poop
     }
 }
