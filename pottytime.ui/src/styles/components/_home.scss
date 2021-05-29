@@ -5,13 +5,12 @@
     padding-right: 1%;
 }
 
-.logout-button {
+.cool-button {
     border-radius: 8px;
     background-color: rgb(255, 255, 255);
     font-family: 'Damion', cursive;
-    font-weight: 1000;
     padding-left: 8px;
-    padding-right: 10px;
+    padding-right: 11px;
 }
 
 .login {
@@ -28,4 +27,10 @@
     font-family: 'Damion', cursive;
     padding-left: 20px;
     padding-right: 25px;
+}
+
+.add-baby {
+    margin-left: 10%;
+    display:flex;
+    justify-content: space-between;
 }

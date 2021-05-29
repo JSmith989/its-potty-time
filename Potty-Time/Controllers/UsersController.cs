@@ -53,5 +53,13 @@ namespace Potty_Time.Controllers
 
             return Ok(user);
         }
+
+        [HttpPut("{id}/description")]
+        public IActionResult UpdateDescription(User user)
+        {
+            _repo.UpdateDescription(user);
+
+            return Ok(user);
+        }
     }
 }

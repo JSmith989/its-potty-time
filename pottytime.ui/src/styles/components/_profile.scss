@@ -2,13 +2,17 @@
     display: flex;
     justify-content: flex-start;
     padding: 2px;
+    margin-left: 1%;
+    margin-right: 1%;
     font-family: Arial, Helvetica, sans-serif;
 
 .card {
-    width: 500px;
-    background-color: rgb(214, 214, 241);
+    width: 140%;
+    background-color: rgb(221, 221, 247);
     padding: 15px;
     border-radius: 20px;
+    border-style:dotted;
+    border-width: 5px;
 }
 
 .heading {
@@ -39,4 +43,12 @@
     max-width: 300px;
 }
 
+}
+
+.add-desc {
+    border-radius: 8px;
+    background-color: rgb(255, 255, 255);
+    font-family: 'Damion', cursive;
+    padding-left: 8px;
+    padding-right: 10px;
 }

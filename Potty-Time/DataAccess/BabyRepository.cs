@@ -24,9 +24,9 @@ namespace Potty_Time.DataAccess
 
         public void Add(Baby baby)
         {
-            var sql = @"Insert into Babies(FirstName, LastName, ImageUrl,  Birthday, UserId,  [Description])
+            var sql = @"Insert into Babies(FirstName, LastName, ImageUrl,  Birthday, UserId,  [Description], ParentId)
                         output inserted.Id
-                        values (@FirstName, @LastName, @ImageUrl, @Birthday, @UserId, @Age, @Description )";
+                        values (@FirstName, @LastName, @ImageUrl, @Birthday, @UserId, @Age, @Description, @ParentId )";
 
             using var db = new SqlConnection(ConnectionString);
 
@@ -58,7 +58,8 @@ namespace Potty_Time.DataAccess
 						Birthday = @birthday,
 						UserId = @userId,
 						Age = @age,
-                        [Description] = @description
+                        [Description] = @description,
+                        ParentId = @parentId
                         WHERE Id = @id";
 
             using var db = new SqlConnection(ConnectionString);
@@ -75,12 +76,28 @@ namespace Potty_Time.DataAccess
 						Birthday = NULL,
 						UserId = NULL,
 						Age = NULL,
-                        [Description] = NULL
+                        [Description] = NULL,
+                        ParentId = NULL
                         WHERE Id = @id";
 
             using var db = new SqlConnection(ConnectionString);
 
             db.Execute(sql, new { id });
+        }
+
+        public List<Baby> GetUsersBabies(string id)
+        {
+            var sql = @"SELECT b.*
+                        FROM Babies b
+	                        join Users u
+		                        on u.Id = b.UserId
+		                 WHERE u.FirebaseId = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var baby = db.Query<Baby>(sql, new { id }).ToList();
+
+            return baby;
         }
     }
 }
