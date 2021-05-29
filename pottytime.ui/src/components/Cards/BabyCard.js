@@ -10,6 +10,9 @@ export default function BabyCard({ baby }) {
   return (
         <div className="babyContainer">
       <Card className="babyContent">
+        <div className="poop-button-container">
+          <button className="poopButton"><i className="fas fa-poo fa-lg"></i></button>
+          </div>
         <CardImg top width="100%" className="babyImage" src={baby.imageUrl} alt="Card image cap" />
         <CardBody>
           <CardTitle tag="h5">{baby.firstName} {baby.lastName}</CardTitle>

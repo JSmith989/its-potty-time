@@ -55,12 +55,15 @@ export default function Home({ user }) {
     <>{user ? (
         <div>
             {loadLogout()}
-            <div className="yourProfile">
-            <Profile />
-            </div>
-            <div className="yourBabies">
-            {showBabies()}
-            </div>
+          <div className="yourProfile">
+              <Profile />
+          </div>
+              <div className="add-baby">
+                 <button className="cool-button"><i className="fas fa-plus fa-xs"></i> Add Baby</button>
+              </div>
+          <div className="yourBabies">
+              {showBabies()}
+          </div>
         </div>
     ) : (
         <div className='login'>

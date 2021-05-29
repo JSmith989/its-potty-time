@@ -1,6 +1,8 @@
 .babyContent {
     max-width: 300px;
-    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 20px;
     border-radius: 30px;
     background-color: rgb(255, 226, 209);
 }
@@ -18,4 +20,16 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     
+}
+
+.poop-button-container{
+    padding: 8px;
+    display:flex;
+    justify-content: flex-end;
+}
+
+.poopButton {
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(145, 114, 114);
 }
