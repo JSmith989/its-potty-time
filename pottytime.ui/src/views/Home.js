@@ -7,12 +7,13 @@ import { getBabies } from '../helpers/data/babyData';
 import Auth from '../components/Auth';
 import Profile from '../components/Profile';
 import BabyCard from '../components/Cards/BabyCard';
+import getUid from '../helpers/data/authData';
 
 export default function Home({ user }) {
   const [babies, setBabies] = useState([]);
 
-  const getAllBabies = () => {
-    getBabies().then((response) => {
+  const getAllBabies = (userId) => {
+    getBabies(userId).then((response) => {
       setBabies(response);
     })
       .catch((err) => console.warn('no babies', err));
@@ -41,7 +42,10 @@ export default function Home({ user }) {
   };
 
   useEffect(() => {
-    getAllBabies();
+    const userId = getUid();
+    if (userId) {
+      getAllBabies(userId);
+    }
   }, [babies]);
 
   const showBabies = () => (

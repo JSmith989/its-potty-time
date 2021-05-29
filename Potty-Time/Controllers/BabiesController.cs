@@ -66,5 +66,13 @@ namespace Potty_Time.Controllers
 
             return Ok();
         }
+
+        [HttpGet("{Id}/yours")]
+        public IActionResult GetUsersBabies(string id)
+        {
+           var baby = _repo.GetUsersBabies(id);
+
+            return Ok(baby);
+        }
     }
 }

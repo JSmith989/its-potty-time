@@ -3,8 +3,8 @@ import { baseUrl } from '../config.json';
 
 const babiesUrl = `${baseUrl}/Babies`;
 
-const getBabies = () => new Promise((resolve, reject) => {
-  axios.get(babiesUrl).then((response) => {
+const getBabies = (userId) => new Promise((resolve, reject) => {
+  axios.get(`${babiesUrl}/${userId}/yours`).then((response) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });

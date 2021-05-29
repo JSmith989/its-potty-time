@@ -8,3 +8,14 @@
 .babyImage {
     border-radius: 20px;
 }
+
+.babyContainer {
+    padding: 10px;
+}
+
+.yourBabies {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    
+}
