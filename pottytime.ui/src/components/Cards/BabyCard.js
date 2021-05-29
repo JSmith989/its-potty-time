@@ -13,7 +13,10 @@ export default function BabyCard({ baby }) {
     const obj = {
       childId: baby.id
     };
-    babyPooped(obj);
+    babyPooped(obj).then((response) => {
+      console.warn(response.data);
+    });
+    // then take to a success message or popup
   };
   return (
         <div className="babyContainer">
