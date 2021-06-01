@@ -15,7 +15,7 @@ import {
 import { getBabies } from '../../helpers/data/babyData';
 import getUid from '../../helpers/data/authData';
 
-const MyNav = () => {
+const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
   const [babies, setBabies] = useState([]);
@@ -29,13 +29,22 @@ const MyNav = () => {
 
   useEffect(() => {
     const userId = getUid();
-
     getAllBabies(userId);
-  }, []);
+  });
 
-  const showBabies = () => (
+  const showCalendar = () => (
     babies.map((baby) => <DropdownItem key={baby.id}>
       <NavLink href={`/calendar/${baby.id}`}>{baby.firstName} {baby.lastName}</NavLink>
+  </DropdownItem>)
+  );
+  const showPictures = () => (
+    babies.map((baby) => <DropdownItem key={baby.id}>
+      <NavLink href={`/pictures/${baby.id}`}>{baby.firstName} {baby.lastName}</NavLink>
+  </DropdownItem>)
+  );
+  const showStatistics = () => (
+    babies.map((baby) => <DropdownItem key={baby.id}>
+      <NavLink href={`/statistics/${baby.id}`}>{baby.firstName} {baby.lastName}</NavLink>
   </DropdownItem>)
   );
 
@@ -54,7 +63,7 @@ const MyNav = () => {
                 Calendar
               </DropdownToggle>
               <DropdownMenu right>
-                {showBabies()}
+                {showCalendar()}
               </DropdownMenu>
             </UncontrolledDropdown>
             <UncontrolledDropdown nav inNavbar>
@@ -62,7 +71,7 @@ const MyNav = () => {
                 Pictures
               </DropdownToggle>
               <DropdownMenu right>
-                {showBabies()}
+                {showPictures()}
               </DropdownMenu>
             </UncontrolledDropdown>
             <UncontrolledDropdown nav inNavbar>
@@ -70,7 +79,7 @@ const MyNav = () => {
                 Statistics
               </DropdownToggle>
               <DropdownMenu right>
-                {showBabies()}
+                {showStatistics()}
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
@@ -80,4 +89,4 @@ const MyNav = () => {
   );
 };
 
-export default MyNav;
+export default Example;
