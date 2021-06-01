@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, momentLocalizer, Views } from 'react-big-calendar';
 import moment from 'moment';
@@ -6,7 +7,7 @@ import { getBabyActivities } from '../helpers/data/activitydata';
 
 const localizer = momentLocalizer(moment);
 
-export default function MyCalendar() {
+export default function MyCalendar(props) {
   const [activities, setActivities] = useState([]);
 
   const getActivities = (babyId) => {
@@ -16,7 +17,7 @@ export default function MyCalendar() {
   };
 
   useEffect(() => {
-    const babyId = 1;
+    const babyId = props.match.params.id;
     if (babyId) {
       getActivities(babyId);
     }
@@ -49,3 +50,12 @@ export default function MyCalendar() {
   </div>
   );
 }
+
+MyCalendar.propTypes = {
+  user: PropTypes.any,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.any
+    })
+  }),
+};
