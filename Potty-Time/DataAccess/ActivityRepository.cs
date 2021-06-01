@@ -97,5 +97,20 @@ namespace Potty_Time.DataAccess
 
             return newActivity;
         }
+
+        public List<Activity> GetBabyActivities(int id)
+        {
+            var sql = @"SELECT a.*
+                        FROM Activities a
+	                        join Babies b
+		                        on b.Id = a.ChildId
+		                 WHERE b.Id = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var activities = db.Query<Activity>(sql, new { id }).ToList();
+
+            return activities;
+        }
     }
 }

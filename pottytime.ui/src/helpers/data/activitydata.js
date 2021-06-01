@@ -5,5 +5,10 @@ const activitiesUrl = `${baseUrl}/Activities`;
 
 const babyPooped = (babyId) => axios.post(`${activitiesUrl}/poop`, babyId);
 
-// eslint-disable-next-line import/prefer-default-export
-export { babyPooped };
+const getBabyActivities = (babyId) => new Promise((resolve, reject) => {
+  axios.get(`${activitiesUrl}/${babyId}/all`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+export { babyPooped, getBabyActivities };
