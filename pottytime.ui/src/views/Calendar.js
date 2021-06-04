@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import { useHistory } from 'react-router-dom';
+// import Modal from '../components/Modal';
+// import EditActivityForm from '../components/Forms/EditActivityForm';
 import { getBabyActivities } from '../helpers/data/activitydata';
 
 const localizer = momentLocalizer(moment);
 
 export default function MyCalendar(props) {
   const [activities, setActivities] = useState([]);
+  const history = useHistory();
 
   const getActivities = (babyId) => {
     getBabyActivities(babyId).then((response) => {
@@ -60,15 +64,18 @@ export default function MyCalendar(props) {
     return array;
   };
 
+  const showEvent = (event) => history.push(`/${event.id}`);
+
   return (
   <div style={{ height: 700 }}>
     <Calendar
+      popup
       localizer={localizer}
       events={newActivity()}
       step={60}
       startAccessor="start"
       views={['month', 'week']}
-      onSelectEvent={(event) => (console.log('event', event))}
+      onSelectEvent={(event) => showEvent(event)}
       endAccessor="end"
     />
   </div>
