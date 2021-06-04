@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Collapse,
   Navbar,
@@ -12,11 +12,41 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
+import { getBabies } from '../../helpers/data/babyData';
+import getUid from '../../helpers/data/authData';
 
 const Example = () => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggle = () => setIsOpen(!isOpen);
+  const [babies, setBabies] = useState([]);
+
+  const getAllBabies = (userId) => {
+    getBabies(userId).then((response) => {
+      setBabies(response);
+    })
+      .catch((err) => console.warn('no babies', err));
+  };
+
+  useEffect(() => {
+    const userId = getUid();
+    getAllBabies(userId);
+  });
+
+  const showCalendar = () => (
+    babies.map((baby) => <DropdownItem key={baby.id}>
+      <NavLink href={`/calendar/${baby.id}`}>{baby.firstName} {baby.lastName}</NavLink>
+  </DropdownItem>)
+  );
+  const showPictures = () => (
+    babies.map((baby) => <DropdownItem key={baby.id}>
+      <NavLink href={`/pictures/${baby.id}`}>{baby.firstName} {baby.lastName}</NavLink>
+  </DropdownItem>)
+  );
+  const showStatistics = () => (
+    babies.map((baby) => <DropdownItem key={baby.id}>
+      <NavLink href={`/statistics/${baby.id}`}>{baby.firstName} {baby.lastName}</NavLink>
+  </DropdownItem>)
+  );
 
   return (
     <div>
@@ -33,16 +63,7 @@ const Example = () => {
                 Calendar
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
-                  Baby 1
-                </DropdownItem>
-                <DropdownItem>
-                  Baby 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
+                {showCalendar()}
               </DropdownMenu>
             </UncontrolledDropdown>
             <UncontrolledDropdown nav inNavbar>
@@ -50,16 +71,7 @@ const Example = () => {
                 Pictures
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
-                  Baby 1
-                </DropdownItem>
-                <DropdownItem>
-                  Baby 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
+                {showPictures()}
               </DropdownMenu>
             </UncontrolledDropdown>
             <UncontrolledDropdown nav inNavbar>
@@ -67,16 +79,7 @@ const Example = () => {
                 Statistics
               </DropdownToggle>
               <DropdownMenu right>
-                <DropdownItem>
-                  Baby 1
-                </DropdownItem>
-                <DropdownItem>
-                  Baby 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
+                {showStatistics()}
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>

@@ -66,5 +66,23 @@ namespace Potty_Time.Controllers
 
             return Ok();
         }
+
+        [HttpPost("poop")]
+        public IActionResult AddPoop(Activity activity)
+        {
+
+            var newActivity = _repo.BabyPooped(activity);
+            newActivity.ActivityType = ActivityType.Poop;
+            newActivity.MealType = MealType.Poop;
+            return Created($"api/Activities/{activity.Id}/poop", newActivity);
+        }
+
+        [HttpGet("{id}/all")]
+        public IActionResult GetListOfActivities(int id)
+        {
+            var activities = _repo.GetBabyActivities(id);
+
+            return Ok(activities);
+        }
     }
 }

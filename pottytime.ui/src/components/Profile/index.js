@@ -39,7 +39,7 @@ const Profile = () => {
     <div className="yourProfile">
     <div className="card">
         <div className="second d-flex flex-row">
-            <div>
+            <div className="img-container">
                 <img className="image p-2" src={user.imageUrl} />
                 {editDescription()}
             </div>
