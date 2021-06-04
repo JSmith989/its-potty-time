@@ -64,7 +64,10 @@ export default function MyCalendar(props) {
     return array;
   };
 
-  const showEvent = (event) => history.push(`/${event.id}`);
+  const showEvent = (event) => {
+    const babyId = props.match.params.id;
+    return history.push(`/${babyId}/${event.id}`);
+  };
 
   return (
   <div style={{ height: 700 }}>
