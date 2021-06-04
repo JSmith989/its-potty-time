@@ -11,4 +11,6 @@ const getBabyActivities = (babyId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export { babyPooped, getBabyActivities };
+const addActivity = (activityObject) => axios.post(activitiesUrl, activityObject);
+
+export { babyPooped, getBabyActivities, addActivity };
