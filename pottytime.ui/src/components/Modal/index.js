@@ -10,7 +10,8 @@ const AppModal = (props) => {
     buttonLabel,
     className,
     btnStyle,
-    title
+    title,
+    plus
   } = props;
 
   const [modal, setModal] = useState(false);
@@ -19,7 +20,7 @@ const AppModal = (props) => {
 
   return (
     <>
-      <button className={btnStyle} onClick={toggle}>{buttonLabel}</button>
+      <button className={btnStyle} onClick={toggle}>{plus} {buttonLabel}</button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>{title}</ModalHeader>
         <ModalBody>
