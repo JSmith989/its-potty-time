@@ -4,9 +4,8 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
-// import Modal from '../components/Modal';
-// import EditActivityForm from '../components/Forms/EditActivityForm';
 import { getBabyActivities } from '../helpers/data/activitydata';
+import CalendarToolbar from './CalendarToolbar';
 
 const localizer = momentLocalizer(moment);
 
@@ -73,6 +72,7 @@ export default function MyCalendar(props) {
   <div style={{ height: 700 }}>
     <Calendar
       popup
+      components={{ toolbar: CalendarToolbar }}
       localizer={localizer}
       events={newActivity()}
       step={60}
