@@ -49,7 +49,6 @@ export default function EditUserForm() {
           mealType: parsedMeal,
           childId: parsedChild
         };
-        console.log(dataObject);
         addActivity(dataObject)
           .catch((err) => console.warn('nope', err));
       });
