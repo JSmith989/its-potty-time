@@ -49,6 +49,7 @@ export default function EditUserForm() {
           mealType: parsedMeal,
           childId: parsedChild
         };
+        console.warn(data.date);
         addActivity(dataObject)
           .catch((err) => console.warn('nope', err));
       });
@@ -97,8 +98,8 @@ export default function EditUserForm() {
       <input {...register('description', { required: true })} />
       <h5>Are they allergic?</h5>
         <select {...register('isAllergy', { required: true })}>
-        <option value={true}>Yes</option>
         <option value={false}>No</option>
+        <option value={true}>Yes</option>
       </select>
       <h5>Food Type</h5>
         <select {...register('mealType', { required: true })}>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import StarRatings from 'react-star-ratings';
 import { getActivityById } from '../helpers/data/activitydata';
 import { getBabyById } from '../helpers/data/babyData';
 
@@ -43,11 +44,14 @@ export default function Activity(props) {
   const enumConvert = () => {
     if (activity.activityType === 0) {
       return 'poop!';
-    } if (activity.activityType === 1) {
+    }
+    if (activity.activityType === 1) {
       return 'breakfast!';
-    } if (activity.activityType === 2) {
+    }
+    if (activity.activityType === 2) {
       return 'lunch!';
-    } if (activity.activityType === 3) {
+    }
+    if (activity.activityType === 3) {
       return 'dinner!';
     }
     return 'No Activity';
@@ -65,55 +69,67 @@ export default function Activity(props) {
   return (
     <>
       {activity.activityType === 0 ? (
-        <div className="p-5">
+        <div className='p-5'>
           <div className='card text-center'>
             <div className='card-header d-flex justify-content-around'>
-              <i className="poopButton fas fa-poo fa-lg"></i>
-              <i className="poopButton fas fa-poo fa-lg"></i>
-              <i className="poopButton fas fa-poo fa-lg"></i>
-              <i className="poopButton fas fa-poo fa-lg"></i>
-              <i className="poopButton fas fa-poo fa-lg"></i>
-              <i className="poopButton fas fa-poo fa-lg"></i>
-              <i className="poopButton fas fa-poo fa-lg"></i>
-              <i className="poopButton fas fa-poo fa-lg"></i>
-              </div>
+              <i className='poopButton fas fa-poo fa-lg'></i>
+              <i className='poopButton fas fa-poo fa-lg'></i>
+              <i className='poopButton fas fa-poo fa-lg'></i>
+              <i className='poopButton fas fa-poo fa-lg'></i>
+              <i className='poopButton fas fa-poo fa-lg'></i>
+              <i className='poopButton fas fa-poo fa-lg'></i>
+              <i className='poopButton fas fa-poo fa-lg'></i>
+              <i className='poopButton fas fa-poo fa-lg'></i>
+            </div>
             <div className='card-body'>
-              <h5 className='card-title'>{baby.firstName}&apos;s {enumConvert()}</h5>
+              <h5 className='card-title'>
+                {baby.firstName}&apos;s {enumConvert()}
+              </h5>
               <p className='card-text'>
-                With supporting text below as a natural lead-in to additional
-                content.
+                Make a button to add description
               </p>
               <button onClick={goBackToCalendar} className='cool-button'>
-               {baby.firstName}&apos;s Calendar
+                {baby.firstName}&apos;s Calendar
               </button>
             </div>
             <div className='card-footer text-muted'>{date.toDateString()}</div>
           </div>
         </div>
       ) : (
-        <div className="p-5">
+        <div className='p-5'>
           <div className='card text-center'>
             <div className='card-header food-awesome d-flex justify-content-around'>
-            <i className="fas fa-pizza-slice fa-lg"></i>
-              <i className="fas fa-coffee fa-lg"></i>
-              <i className="fas fa-drumstick-bite fa-lg"></i>
-              <i className="fas fa-apple-alt fa-lg"></i>
-              <i className="fas fa-fish fa-lg"></i>
-              <i className="fas fa-carrot fa-lg"></i>
-              <i className="fas fa-hotdog fa-lg"></i>
-              <i className="fas fa-pepper-hot fa-lg"></i>
-              <i className="fas fa-hamburger fa-lg"></i>
+              <i className='fas fa-pizza-slice fa-lg'></i>
+              <i className='fas fa-coffee fa-lg'></i>
+              <i className='fas fa-drumstick-bite fa-lg'></i>
+              <i className='fas fa-apple-alt fa-lg'></i>
+              <i className='fas fa-fish fa-lg'></i>
+              <i className='fas fa-carrot fa-lg'></i>
+              <i className='fas fa-hotdog fa-lg'></i>
+              <i className='fas fa-pepper-hot fa-lg'></i>
+              <i className='fas fa-hamburger fa-lg'></i>
             </div>
             <div className='card-body'>
-              <h5 className='card-title'>{baby.firstName}&apos;s {enumConvert()}</h5>
+              <h5 className='card-title'>
+                {baby.firstName}&apos;s {enumConvert()}
+              </h5>
+              <img
+                src={activity.imageUrl}
+                className='card-img-top activity-image'
+                alt='...'
+              ></img>
               <p className='card-text'>
-                {activity.description}
+                <StarRatings
+                  rating={activity.rating}
+                  starRatedColor='blue'
+                  numberOfStars={5}
+                  name='rating'
+                />
               </p>
-              <p className='card-text'>
-                {truthDetector()}
-              </p>
+              <p className='card-text'>{activity.description}</p>
+              <p className='card-text'>{truthDetector()}</p>
               <button onClick={goBackToCalendar} className='cool-button'>
-              {baby.firstName}&apos;s Calendar
+                {baby.firstName}&apos;s Calendar
               </button>
             </div>
             <div className='card-footer text-muted'>{date.toDateString()}</div>
@@ -128,7 +144,7 @@ Activity.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       activityId: PropTypes.any,
-      babyId: PropTypes.any
+      babyId: PropTypes.any,
     }),
   }),
 };

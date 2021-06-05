@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Home from '../views/Home';
 import Activity from '../views/Activity';
 import Calendar from '../views/Calendar';
+import Pictures from '../views/Pictures';
+import Statistics from '../views/Statistics';
 import { getBabies } from './data/babyData';
 import getUid from './data/authData';
 
@@ -27,6 +29,8 @@ export default function Routes({ user }) {
     <Switch>
       <Route exact path='/' component={() => <Home user={user} />} />
       <Route exact path='/calendar/:id' component={(props) => <Calendar user={user} {...props} />} />
+      <Route exact path='/pictures/:id' component={(props) => <Pictures user={user} {...props} />} />
+      <Route exact path='/calendar/:id' component={(props) => <Statistics user={user} {...props} />} />
       <Route exact path='/:babyId/:activityId' component={(props) => <Activity user={user} {...props} />} />
     </Switch>
   );
