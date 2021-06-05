@@ -68,9 +68,10 @@ export default function EditUserForm() {
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
         <h5>Which child?</h5>
         <select {...register('childId', { required: true })}>
+        <option>Select a baby</option>
         {babyOptions()}
       </select>
       <h5>Activity</h5>
@@ -86,6 +87,7 @@ export default function EditUserForm() {
        max="2300-06-14T00:00" {...register('date', { required: true })} />
       <h5>Rating</h5>
         <select {...register('rating', { required: true })}>
+        <option value={0}>0 out of 5</option>
         <option value={1}>1 out of 5</option>
         <option value={2}>2 out of 5</option>
         <option value={3}>3 out of 5</option>
@@ -100,20 +102,27 @@ export default function EditUserForm() {
         <select {...register('isAllergy', { required: true })}>
         <option value={false}>No</option>
         <option value={true}>Yes</option>
+        <option value={false}>N/A </option>
       </select>
       <h5>Food Type</h5>
         <select {...register('mealType', { required: true })}>
+        <option value={3}>None</option>
         <option value={0}>Vegetable</option>
         <option value={1}>Fruit</option>
         <option value={2}>Meat</option>
       </select>
-      {errors.firstName && <span>This field is required</span>}
-      {errors.lastName && <span>This field is required</span>}
-      {errors.email && <span>This field is required</span>}
-      {errors.imageUrl && <span>This field is required</span>}
+      {errors.childId && <span>Child is required</span>}
+      {errors.activityType && <span>Activity type is required</span>}
+      {errors.date && <span>Date is required</span>}
+      {errors.rating && <span>Rating is required</span>}
+      {errors.imageUrl && <span>Image is required</span>}
+      {errors.description && <span>Description is required</span>}
+      {errors.isAllergy && <span>Allergy is required</span>}
+      {errors.mealType && <span>Meal type is required</span>}
 
       <button type='submit'>Submit</button>
-    </form>
+      </form>
+
   );
 }
 
