@@ -24,7 +24,7 @@ namespace Potty_Time.DataAccess
 
         public void Add(Baby baby)
         {
-            var sql = @"Insert into Babies(FirstName, LastName, ImageUrl,  Birthday, UserId,  [Description], ParentId)
+            var sql = @"Insert into Babies(FirstName, LastName, ImageUrl,  Birthday, UserId, Age, [Description], ParentId)
                         output inserted.Id
                         values (@FirstName, @LastName, @ImageUrl, @Birthday, @UserId, @Age, @Description, @ParentId )";
 
