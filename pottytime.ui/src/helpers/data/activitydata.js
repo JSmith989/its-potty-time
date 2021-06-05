@@ -17,4 +17,12 @@ const addActivity = (activityObject) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export { babyPooped, getBabyActivities, addActivity };
+const getActivityById = (activityId) => new Promise((resolve, reject) => {
+  axios.get(`${activitiesUrl}/${activityId}`).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+export {
+  babyPooped, getBabyActivities, addActivity, getActivityById
+};

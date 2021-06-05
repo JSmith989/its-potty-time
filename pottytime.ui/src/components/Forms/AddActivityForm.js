@@ -82,7 +82,7 @@ export default function EditUserForm() {
       <h5>Date</h5>
       <input type="datetime-local" id="meeting-time"
        name="meeting-time"
-       min="2021-06-14T00:00" max="2300-06-14T00:00" {...register('date', { required: true })} />
+       max="2300-06-14T00:00" {...register('date', { required: true })} />
       <h5>Rating</h5>
         <select {...register('rating', { required: true })}>
         <option value={1}>1 out of 5</option>
