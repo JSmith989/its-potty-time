@@ -15,4 +15,10 @@ const getBabyById = (babyId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export { getBabyById, getBabies };
+const addBaby = (babyObject) => new Promise((resolve, reject) => {
+  axios.post(babiesUrl, babyObject).then((response) => {
+    resolve(response.data);
+  }).catch((error) => reject(error));
+});
+
+export { getBabyById, getBabies, addBaby };

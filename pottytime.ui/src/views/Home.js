@@ -8,8 +8,10 @@ import Auth from '../components/Auth';
 import Profile from '../components/Profile';
 import BabyCard from '../components/Cards/BabyCard';
 import getUid from '../helpers/data/authData';
+import Modal from '../components/Modal';
+import MakeABaby from '../components/Forms/MakeABaby';
 
-export default function Home({ user }) {
+export default function Home({ user, userDetails }) {
   const [babies, setBabies] = useState([]);
 
   const getAllBabies = (userId) => {
@@ -59,7 +61,11 @@ export default function Home({ user }) {
               <Profile />
           </div>
               <div className="add-baby">
-                 <button className="cool-button"><i className="fas fa-plus fa-xs"></i> Add Baby</button>
+              <Modal title={'Add Baby'} btnStyle={'cool-button'} plus={<i className="fas fa-plus fa-xs"></i>} buttonLabel={'Add Baby'}>
+      <MakeABaby
+      user={userDetails}
+      />
+    </Modal>
               </div>
           <div className="yourBabies">
               {showBabies()}
@@ -75,5 +81,6 @@ export default function Home({ user }) {
 }
 
 Home.propTypes = {
-  user: PropTypes.any
+  user: PropTypes.any,
+  userDetails: PropTypes.any,
 };
