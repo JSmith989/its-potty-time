@@ -26,7 +26,7 @@ export default function EditUserForm() {
   const onSubmit = (data) => {
     const file = data.imageUrl[0];
     const storageRef = firebase.storage().ref();
-    const fileRef = storageRef.child(file.name);
+    const fileRef = storageRef.child(`${Date.now()}-${file.name}`);
     fileRef.put(file).then((snapshot) => {
       snapshot.ref.getDownloadURL().then((image) => {
         const parsedActivity = Number(data.activityType);
@@ -49,7 +49,7 @@ export default function EditUserForm() {
           mealType: parsedMeal,
           childId: parsedChild
         };
-        console.warn(data.date);
+        console.warn(dataObject);
         addActivity(dataObject)
           .catch((err) => console.warn('nope', err));
       });

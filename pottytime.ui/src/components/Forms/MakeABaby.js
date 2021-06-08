@@ -18,7 +18,7 @@ export default function MakeABaby({ user }) {
     const parent = getUid();
     const file = data.imageUrl[0];
     const storageRef = firebase.storage().ref();
-    const fileRef = storageRef.child(file.name);
+    const fileRef = storageRef.child(`${Date.now()}-${file.name}`);
     fileRef.put(file).then((snapshot) => {
       snapshot.ref.getDownloadURL().then((image) => {
         const parsedId = Number(user.id);
@@ -33,7 +33,6 @@ export default function MakeABaby({ user }) {
           description: data.description,
           parentId: parent
         };
-        console.log(dataObject);
         addBaby(dataObject)
           .catch((err) => console.warn('nope', err));
       });
