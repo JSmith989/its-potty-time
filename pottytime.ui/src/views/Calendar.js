@@ -28,8 +28,11 @@ export default function MyCalendar(props) {
 
   const newActivity = () => {
     const array = [];
+    const deleted = [];
     activities.map((activity) => {
-      if (activity.activityType === 0) {
+      if (activity.description === 'Deleted') {
+        deleted.push(activity);
+      } else if (activity.activityType === 0) {
         array.push({
           id: activity.id,
           title: 'Poop',

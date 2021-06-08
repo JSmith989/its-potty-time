@@ -27,6 +27,8 @@ const updateActivity = (activityId, updatedActivity) => axios.put(`${activitiesU
 
 const updateDescription = (activity, updatedActivity) => axios.put(`${activitiesUrl}/${activity}/description`, updatedActivity);
 
+const deleteActivity = (activityId) => axios.delete(`${activitiesUrl}/${activityId}`);
+
 export {
-  babyPooped, getBabyActivities, addActivity, getActivityById, updateActivity, updateDescription
+  babyPooped, getBabyActivities, addActivity, getActivityById, updateActivity, updateDescription, deleteActivity
 };

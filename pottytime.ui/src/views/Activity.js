@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
-import { getActivityById } from '../helpers/data/activitydata';
+import { getActivityById, deleteActivity } from '../helpers/data/activitydata';
 import { getBabyById } from '../helpers/data/babyData';
 import Modal from '../components/Modal';
 import EditActivityForm from '../components/Forms/EditActivityForm';
@@ -69,12 +69,20 @@ export default function Activity(props) {
 
   const date = new Date(activity.date);
 
+  const deleteAct = (e) => {
+    const { babyId } = props.match.params;
+    deleteActivity(e.target.id);
+    setTimeout(() => {
+      history.push(`/calendar/${babyId}`);
+    }, 100);
+  };
+
   return (
     <>
       {activity.activityType === 0 ? (
         <div className='p-5'>
           <div className='card text-center'>
-            <div className='card-header d-flex justify-content-around'>
+            <div className='card-header p-3 d-flex justify-content-around'>
               <i className='poopButton fas fa-poo fa-lg'></i>
               <i className='poopButton fas fa-poo fa-lg'></i>
               <i className='poopButton fas fa-poo fa-lg'></i>
@@ -100,9 +108,12 @@ export default function Activity(props) {
                 </Modal>
                 )}
               </p>
+              <div className='button-activity d-flex justify-content-evenly'>
               <button onClick={goBackToCalendar} className='cool-button'>
                 {baby.firstName}&apos;s Calendar
               </button>
+              <button type="button" id={activity.id} onClick={(e) => { deleteAct(e); } } className="cool-button-danger">Delete Activity</button>
+              </div>
             </div>
             <div className='card-footer text-muted'>{date.toDateString()}</div>
           </div>
@@ -110,7 +121,7 @@ export default function Activity(props) {
       ) : (
         <div className='p-5'>
           <div className='card text-center'>
-            <div className='card-header food-awesome d-flex justify-content-around'>
+            <div className='card-header p-3 food-awesome d-flex justify-content-around'>
               <i className='fas fa-pizza-slice fa-lg'></i>
               <i className='fas fa-coffee fa-lg'></i>
               <i className='fas fa-drumstick-bite fa-lg'></i>
@@ -151,6 +162,7 @@ export default function Activity(props) {
             key={activity.id}
             />
           </Modal>
+          <button type="button" id={activity.id} onClick={(e) => { deleteAct(e); } } className="cool-button-danger">Delete Activity</button>
               </div>
             </div>
             <div className='card-footer text-muted'>{date.toDateString()}</div>
