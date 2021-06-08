@@ -4,6 +4,9 @@ import { useHistory } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import { getActivityById } from '../helpers/data/activitydata';
 import { getBabyById } from '../helpers/data/babyData';
+import Modal from '../components/Modal';
+import EditActivityForm from '../components/Forms/EditActivityForm';
+import PoopDescription from '../components/Forms/PoopDescription';
 
 export default function Activity(props) {
   const [activity, setActivity] = useState([]);
@@ -86,7 +89,16 @@ export default function Activity(props) {
                 {baby.firstName}&apos;s {enumConvert()}
               </h5>
               <p className='card-text'>
-                Make a button to add description
+                { activity.description ? (
+                  <p>{activity.description}</p>
+                ) : (
+                  <Modal title={'Add Description'} btnStyle={'cool-button'} buttonLabel={'Add Description'}>
+                  <PoopDescription
+                   activity={activity}
+                  key={activity.id}
+                  />
+                </Modal>
+                )}
               </p>
               <button onClick={goBackToCalendar} className='cool-button'>
                 {baby.firstName}&apos;s Calendar
@@ -128,9 +140,18 @@ export default function Activity(props) {
               </p>
               <p className='card-text'>{activity.description}</p>
               <p className='card-text'>{truthDetector()}</p>
+              <div className='button-activity d-flex justify-content-evenly'>
               <button onClick={goBackToCalendar} className='cool-button'>
                 {baby.firstName}&apos;s Calendar
               </button>
+              <Modal title={'Edit'} btnStyle={'cool-button'} buttonLabel={'Edit'}>
+            <EditActivityForm
+            baby={baby}
+            activity={activity}
+            key={activity.id}
+            />
+          </Modal>
+              </div>
             </div>
             <div className='card-footer text-muted'>{date.toDateString()}</div>
           </div>

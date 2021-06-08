@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
-import { updateDescription } from '../../helpers/data/userData';
+import { updateDescription } from '../../helpers/data/activitydata';
 
-export default function AddDescription({ user }) {
+export default function PoopDescription({ activity }) {
   const {
     register,
     handleSubmit,
@@ -11,20 +11,20 @@ export default function AddDescription({ user }) {
   } = useForm();
 
   const onSubmit = (data) => {
-    const userId = user.id;
-    const parsedId = Number(user.id);
+    const activityId = activity.id;
+    const parsedId = Number(activity.id);
     const dataObject = {
       id: parsedId,
       description: data.description
     };
-    updateDescription(userId, dataObject)
+    updateDescription(activityId, dataObject)
       .catch((err) => console.warn('nope', err));
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <h5>Description</h5>
-      <input defaultValue={user.description} {...register('description', { required: true })} />
+      <input defaultValue={activity.description} {...register('description', { required: true })} />
       {errors.description && <span>This field is required</span>}
 
       <button type='submit'>Submit</button>
@@ -32,6 +32,6 @@ export default function AddDescription({ user }) {
   );
 }
 
-AddDescription.propTypes = {
-  user: PropTypes.any
+PoopDescription.propTypes = {
+  activity: PropTypes.any
 };

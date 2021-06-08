@@ -21,4 +21,8 @@ const addBaby = (babyObject) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-export { getBabyById, getBabies, addBaby };
+const updateBaby = (babyId, updatedBaby) => axios.put(`${babiesUrl}/${babyId}/update`, updatedBaby);
+
+export {
+  getBabyById, getBabies, addBaby, updateBaby
+};

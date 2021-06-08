@@ -23,6 +23,10 @@ const getActivityById = (activityId) => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
+const updateActivity = (activityId, updatedActivity) => axios.put(`${activitiesUrl}/${activityId}/update`, updatedActivity);
+
+const updateDescription = (activity, updatedActivity) => axios.put(`${activitiesUrl}/${activity}/description`, updatedActivity);
+
 export {
-  babyPooped, getBabyActivities, addActivity, getActivityById
+  babyPooped, getBabyActivities, addActivity, getActivityById, updateActivity, updateDescription
 };

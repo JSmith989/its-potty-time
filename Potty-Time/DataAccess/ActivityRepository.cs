@@ -112,5 +112,16 @@ namespace Potty_Time.DataAccess
 
             return activities;
         }
+
+        public void UpdateDescription(Activity activity)
+        {
+            using var db = new SqlConnection(ConnectionString);
+
+            var sql = @"UPDATE Activities
+                        SET [Description] = @Description
+                        WHERE Id = @id";
+
+            db.Execute(sql, activity);
+        }
     }
 }
