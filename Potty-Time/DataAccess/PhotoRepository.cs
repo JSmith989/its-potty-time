@@ -70,5 +70,18 @@ namespace Potty_Time.DataAccess
 
             db.Execute(sql, new { id });
         }
+
+        public List<Photo> GetBabyPhotos(int id)
+        {
+            var sql = @"SELECT *
+                         FROM photos
+                            WHERE childId = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var photos = db.Query<Photo>(sql, new { id }).ToList();
+
+            return photos;
+        }
     }
 }

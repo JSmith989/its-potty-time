@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { baseUrl } from '../config.json';
 
-const picturesUrl = `${baseUrl}/Pictures`;
+const picturesUrl = `${baseUrl}/Photos`;
 
 const getPhotos = () => new Promise((resolve, reject) => {
   axios.get(picturesUrl).then((response) => {
@@ -9,8 +9,8 @@ const getPhotos = () => new Promise((resolve, reject) => {
   }).catch((error) => reject(error));
 });
 
-const getPhotoById = (photoId) => new Promise((resolve, reject) => {
-  axios.get(`${picturesUrl}/${photoId}`).then((response) => {
+const getPhotoByBabyId = (babyId) => new Promise((resolve, reject) => {
+  axios.get(`${picturesUrl}/${babyId}/photos`).then((response) => {
     resolve(response.data);
   }).catch((error) => reject(error));
 });
@@ -22,5 +22,5 @@ const addPhoto = (photoObj) => new Promise((resolve, reject) => {
 });
 
 export {
-  getPhotoById, getPhotos, addPhoto,
+  getPhotoByBabyId, getPhotos, addPhoto,
 };

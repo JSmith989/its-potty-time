@@ -66,5 +66,13 @@ namespace Potty_Time.Controllers
 
             return Ok();
         }
+
+        [HttpGet("{id}/photos")]
+        public IActionResult GetPhotosById(int id)
+        {
+            var photos = _repo.GetBabyPhotos(id);
+
+            return Ok(photos);
+        }
     }
 }
