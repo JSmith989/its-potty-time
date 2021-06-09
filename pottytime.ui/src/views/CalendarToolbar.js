@@ -7,7 +7,7 @@ export default class CalendarToolbar extends Toolbar {
   render() {
     return (
         <>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-around">
         <div className='rbc-btn-group'>
           <button type='button' className="cool-button" onClick={() => this.navigate('TODAY')}>
             TODAY

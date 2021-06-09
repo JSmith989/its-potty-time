@@ -92,5 +92,13 @@ namespace Potty_Time.Controllers
 
             return Ok(activity);
         }
+
+        [HttpGet("{id}/child")]
+        public IActionResult GetActivityImages(int id)
+        {
+            var activities = _repo.GetActivityImages(id);
+
+            return Ok(activities);
+        }
     }
 }

@@ -123,5 +123,19 @@ namespace Potty_Time.DataAccess
 
             db.Execute(sql, activity);
         }
+
+        public List<Activity> GetActivityImages(int id)
+        {
+            var sql = @"SELECT a.id, a.ImageUrl, a.description
+                        FROM Activities a
+		                 WHERE a.ImageUrl IS NOT NULL AND
+						  a.ChildId = @id";
+
+            using var db = new SqlConnection(ConnectionString);
+
+            var activities = db.Query<Activity>(sql, new { id }).ToList();
+
+            return activities;
+        }
     }
 }

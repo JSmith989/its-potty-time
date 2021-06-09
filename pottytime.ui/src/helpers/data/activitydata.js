@@ -29,6 +29,12 @@ const updateDescription = (activity, updatedActivity) => axios.put(`${activities
 
 const deleteActivity = (activityId) => axios.delete(`${activitiesUrl}/${activityId}`);
 
+const getActivityImages = (babyId) => new Promise((resolve, reject) => {
+  axios.get(`${activitiesUrl}/${babyId}/child`).then((response) => {
+    resolve(response.data);
+  }).catch((err) => reject(err));
+});
+
 export {
-  babyPooped, getBabyActivities, addActivity, getActivityById, updateActivity, updateDescription, deleteActivity
+  babyPooped, getBabyActivities, addActivity, getActivityById, updateActivity, updateDescription, deleteActivity, getActivityImages
 };
