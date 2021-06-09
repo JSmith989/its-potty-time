@@ -23,9 +23,9 @@ namespace Potty_Time.DataAccess
 
         public void Add(Photo photo)
         {
-            var sql = @"Insert into Photos(ImageUrl, ChildId, ActivityId)
+            var sql = @"Insert into Photos(ImageUrl, ChildId)
                         output inserted.Id
-                        values (@ImageUrl, @ChildId, @ActivityId)";
+                        values (@ImageUrl, @ChildId)";
 
             using var db = new SqlConnection(ConnectionString);
 
