@@ -30,7 +30,7 @@ export default function Routes({ user, userDetails }) {
       <Route exact path='/' component={() => <Home user={user} userDetails={userDetails} />} />
       <Route exact path='/calendar/:id' component={(props) => <Calendar user={user} {...props} />} />
       <Route exact path='/pictures/:id' component={(props) => <Pictures user={user} {...props} />} />
-      <Route exact path='/calendar/:id' component={(props) => <Statistics user={user} {...props} />} />
+      <Route exact path='/statistics/:id' component={(props) => <Statistics user={user} {...props} />} />
       <Route exact path='/:babyId/:activityId' component={(props) => <Activity user={user} {...props} />} />
     </Switch>
   );
