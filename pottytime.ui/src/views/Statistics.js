@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Bar } from 'react-chartjs-2';
+import { Bar, Pie } from 'react-chartjs-2';
 import { getBabyActivities } from '../helpers/data/activitydata';
+import {
+  veg, meat, fruit, fiveStar, fourStar, threeStar, twoStar, oneStar, noStar
+} from '../helpers/chartHelpers';
 
 export default class Stats extends Component {
   state = {
@@ -24,67 +27,69 @@ export default class Stats extends Component {
        activities,
      } = this.state;
 
-     const veg = () => {
-       const v = [];
-       activities.forEach((activity) => {
-         if (activity.mealType === 0) {
-           v.push(activity);
-         }
-       });
-       return v;
-     };
-     const fruit = () => {
-       const f = [];
-       activities.forEach((activity) => {
-         if (activity.mealType === 1) {
-           f.push(activity);
-         }
-       });
-       return f;
-     };
-     const meat = () => {
-       const m = [];
-       activities.forEach((activity) => {
-         if (activity.mealType === 2) {
-           m.push(activity);
-         }
-       });
-       return m;
-     };
      return (
       <>
-     <div className='header'>
-      <h1 className='title'>Balanced Diet</h1>
+        <div className='header p-3'>
+          <h1 className='title'>Balanced Diet</h1>
+        </div>
+          <Bar data={{
+            labels: ['Meats', 'Vegetables', 'Fruits'],
+            datasets: [
+              {
+                label: '# of food items',
+                data: [meat(activities).length, veg(activities).length, fruit(activities).length],
+                backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(255, 159, 64, 0.2)',
+                ],
+                borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(255, 159, 64, 1)',
+                ],
+                borderWidth: 1,
+              },
+            ],
+          }} options={{
+            scales: {
+              yAxes: [
+                {
+                  ticks: { beginAtZero: true },
+                },
+              ],
+            },
+          }} />
+          <div className='header p-5'>
+      <h1 className='title'>Food Ratings</h1>
     </div>
-    <Bar data={{
-      labels: ['Meats', 'Vegetables', 'Fruits'],
+    <Pie data={{
+      labels: ['Five Stars', 'Four Stars', 'Three Stars', 'Two Stars', 'One Star', 'No Stars'],
       datasets: [
         {
-          label: '# of food items',
-          data: [meat().length, veg().length, fruit().length],
+          label: '# of ratings',
+          data: [fiveStar(activities), fourStar(activities), threeStar(activities), twoStar(activities), oneStar(activities), noStar(activities)],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
             'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
             'rgba(255, 159, 64, 0.2)',
           ],
           borderColor: [
             'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
             'rgba(75, 192, 192, 1)',
-            'rgba(255, 159, 64, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 0.2)',
           ],
           borderWidth: 1,
         },
       ],
-    }} options={{
-      scales: {
-        yAxes: [
-          {
-            ticks: { beginAtZero: true },
-          },
-        ],
-      },
     }} />
-   </>
+      </>
      );
    }
 }
