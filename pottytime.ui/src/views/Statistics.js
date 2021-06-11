@@ -1,9 +1,99 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Bar } from 'react-chartjs-2';
+import { getBabyActivities } from '../helpers/data/activitydata';
 
-export default function Statistics() {
-  return (
-    <div>
-      <h2>Statistics</h2>
+export default class Stats extends Component {
+  state = {
+    activities: [],
+  }
+
+  componentDidMount() {
+    const babyId = this.props.match.params.id;
+    this.getActivities(babyId);
+  }
+
+   getActivities = (babyId) => {
+     getBabyActivities(babyId).then((response) => {
+       this.setState({ activities: response });
+     });
+   };
+
+   render() {
+     const {
+       activities,
+     } = this.state;
+
+     const veg = () => {
+       const v = [];
+       activities.forEach((activity) => {
+         if (activity.mealType === 0) {
+           v.push(activity);
+         }
+       });
+       return v;
+     };
+     const fruit = () => {
+       const f = [];
+       activities.forEach((activity) => {
+         if (activity.mealType === 1) {
+           f.push(activity);
+         }
+       });
+       return f;
+     };
+     const meat = () => {
+       const m = [];
+       activities.forEach((activity) => {
+         if (activity.mealType === 2) {
+           m.push(activity);
+         }
+       });
+       return m;
+     };
+     return (
+      <>
+     <div className='header'>
+      <h1 className='title'>Balanced Diet</h1>
     </div>
-  );
+    <Bar data={{
+      labels: ['Meats', 'Vegetables', 'Fruits'],
+      datasets: [
+        {
+          label: '# of food items',
+          data: [meat().length, veg().length, fruit().length],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(255, 159, 64, 1)',
+          ],
+          borderWidth: 1,
+        },
+      ],
+    }} options={{
+      scales: {
+        yAxes: [
+          {
+            ticks: { beginAtZero: true },
+          },
+        ],
+      },
+    }} />
+   </>
+     );
+   }
 }
+
+Stats.propTypes = {
+  user: PropTypes.any,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.any
+    })
+  }),
+};
