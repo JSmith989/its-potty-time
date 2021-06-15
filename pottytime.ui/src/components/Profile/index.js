@@ -44,7 +44,7 @@ const Profile = () => {
                 {editDescription()}
             </div>
                 <div className="about d-flex flex-column"> <h2 className="yourName">{user.firstName} {user.lastName}</h2>
-                <div className="description"> <p>{user.description ? user.description : addDescription()}</p></div>
+                <div className="description "> <p>{user.description ? user.description : addDescription()}</p></div>
                 </div>
         </div>
     </div>
