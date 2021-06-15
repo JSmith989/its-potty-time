@@ -38,6 +38,7 @@ export default function MyCalendar(props) {
           title: 'Poop',
           start: new Date(activity.date),
           end: new Date(activity.date),
+          color: 'rgb(94, 53, 53)',
         });
       } else if (activity.activityType === 1) {
         array.push({
@@ -45,6 +46,7 @@ export default function MyCalendar(props) {
           title: 'Breakfast',
           start: new Date(activity.date),
           end: new Date(activity.date),
+          color: 'rgb(248, 144, 25)',
         });
       } else if (activity.activityType === 2) {
         array.push({
@@ -52,6 +54,7 @@ export default function MyCalendar(props) {
           title: 'Lunch',
           start: new Date(activity.date),
           end: new Date(activity.date),
+          color: 'green',
         });
       } else if (activity.activityType === 3) {
         array.push({
@@ -59,6 +62,7 @@ export default function MyCalendar(props) {
           title: 'Dinner',
           start: new Date(activity.date),
           end: new Date(activity.date),
+          color: 'rgb(97, 132, 153)'
         });
       }
       return null;
@@ -83,6 +87,14 @@ export default function MyCalendar(props) {
       views={['month', 'week']}
       onSelectEvent={(event) => showEvent(event)}
       endAccessor="end"
+      eventPropGetter={ (event) => ({
+        style: {
+          backgroundColor: event.color,
+          display: 'flex',
+          justifyContent: 'center',
+          letterSpacing: '2px'
+        }
+      })}
     />
   </div>
   );

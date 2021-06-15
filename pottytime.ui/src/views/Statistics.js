@@ -28,9 +28,9 @@ export default class Stats extends Component {
      } = this.state;
 
      return (
-      <>
-        <div className='header p-3'>
-          <h1 className='title'>Balanced Diet</h1>
+      <div className="stats">
+        <div className='header'>
+          <h1 className='title cool-font'>Balanced Diet</h1>
         </div>
           <Bar data={{
             labels: ['Meats', 'Vegetables', 'Fruits'],
@@ -60,8 +60,8 @@ export default class Stats extends Component {
               ],
             },
           }} />
-          <div className='header p-5'>
-      <h1 className='title'>Food Ratings</h1>
+          <div className='header'>
+      <h1 className='title cool-font'>Food Review</h1>
     </div>
     <Pie data={{
       labels: ['Five Stars', 'Four Stars', 'Three Stars', 'Two Stars', 'One Star', 'No Stars'],
@@ -89,7 +89,7 @@ export default class Stats extends Component {
         },
       ],
     }} />
-      </>
+      </div>
      );
    }
 }
