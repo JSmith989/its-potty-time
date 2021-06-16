@@ -4,6 +4,7 @@ import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle
 } from 'reactstrap';
+import moment from 'moment';
 import { babyPooped } from '../../helpers/data/activitydata';
 import Modal from '../Modal';
 import EditBaby from '../Forms/EditBaby';
@@ -13,6 +14,7 @@ import { getUserById } from '../../helpers/data/userData';
 export default function BabyCard({ baby }) {
   const [user, setUser] = useState([]);
   const date = new Date(baby.birthday);
+  const ageForCalc = baby.birthday;
   const handleSubmit = (e) => {
     e.preventDefault();
     const obj = {
@@ -36,6 +38,44 @@ export default function BabyCard({ baby }) {
       getUser(userId);
     }
   }, [user]);
+
+  const thisAgeThing = (bday) => {
+    const dob = bday;
+    const myDob = dob.split('T')[0].split('-').join(', ');
+    const ctrlDob = new Date(myDob);
+
+    const cur = moment().format();
+    const myDate = cur.split('T')[0].split('-').join(', ');
+    const ctrlDoa = new Date(myDate);
+
+    const diff = new Date(ctrlDoa.getTime() - ctrlDob.getTime());
+
+    const year = diff.getUTCFullYear() - 1970;
+    const month = diff.getUTCMonth();
+    const day = diff.getUTCDate() - 1;
+    if (year !== 0 && month !== 0 && day !== 0) {
+      return (`${year}yr, ${month}mo, and ${day} day(s)`);
+    }
+    if (year !== 0 && month !== 0 && day === 0) {
+      return (`${year}yr, and ${month}mo`);
+    }
+    if (year !== 0 && month === 0 && day !== 0) {
+      return (`${year}yr and ${day} day(s)`);
+    }
+    if (year !== 0 && month === 0 && day === 0) {
+      return (`${year}yr(s)`);
+    }
+    if (year === 0 && month !== 0 && day !== 0) {
+      return (`${month}mo and ${day} day(s)`);
+    }
+    if (year === 0 && month !== 0 && day === 0) {
+      return (`${month}mo(s)`);
+    }
+    if (year === 0 && month === 0 && day !== 0) {
+      return (`${day} day(s)`);
+    }
+    return 'Pretty Old';
+  };
   return (
         <div className="babyContainer">
       <Card className="babyContent">
@@ -52,8 +92,8 @@ export default function BabyCard({ baby }) {
             />
           </Modal>
           <CardTitle tag="h5">{baby.firstName} {baby.lastName}</CardTitle>
-          <CardSubtitle tag="h6" className="mb-2 text-muted">Age: {baby.age}</CardSubtitle>
-          <CardText>Birthday: {date.toDateString()}</CardText>
+          <CardSubtitle tag="h6" className="mb-2 text-muted">{thisAgeThing(ageForCalc)}</CardSubtitle>
+          <CardText>Born {date.toDateString()}</CardText>
           <CardText>{baby.description}</CardText>
         </CardBody>
       </Card>

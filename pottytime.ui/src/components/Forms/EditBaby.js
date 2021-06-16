@@ -23,7 +23,6 @@ export default function EditBaby({ baby, user }) {
       snapshot.ref.getDownloadURL().then((image) => {
         const parsedId = Number(baby.id);
         const parsedParent = Number(user.id);
-        const parsedAge = Number(data.age);
         const dataObject = {
           id: parsedId,
           firstName: data.firstName,
@@ -31,7 +30,6 @@ export default function EditBaby({ baby, user }) {
           imageUrl: image,
           birthday: data.birthday,
           userId: parsedParent,
-          age: parsedAge,
           description: data.description,
           parentId: parent
         };
@@ -53,15 +51,12 @@ export default function EditBaby({ baby, user }) {
       <input type="datetime-local" id="meeting-time"
        name="meeting-time"
        max="2300-06-14T00:00" defaultValue={baby.birthday} {...register('birthday', { required: true })} />
-      <h5>Age</h5>
-      <input defaultValue={baby.age} {...register('age', { required: true })} />
       <h5>Description</h5>
       <input defaultValue={baby.description} {...register('description', { required: true })} />
       {errors.firstName && <span>This field is required</span>}
       {errors.lastName && <span>This field is required</span>}
       {errors.imageUrl && <span>This field is required</span>}
       {errors.birthday && <span>This field is required</span>}
-      {errors.age && <span>This field is required</span>}
       {errors.description && <span>This field is required</span>}
 
       <button type='submit'>Submit</button>
