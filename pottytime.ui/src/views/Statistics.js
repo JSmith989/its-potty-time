@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Bar, Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import { getBabyActivities } from '../helpers/data/activitydata';
 import {
-  veg, meat, fruit, fiveStar, fourStar, threeStar, twoStar, oneStar, noStar
+  veg, meat, fruit, fiveVeg, fourVeg, threeVeg, twoVeg, oneVeg,
+  fiveFruit, fourFruit, threeFruit, twoFruit, oneFruit,
+  fiveMeat, fourMeat, threeMeat, twoMeat, oneMeat,
 } from '../helpers/chartHelpers';
 
 export default class Stats extends Component {
@@ -63,29 +65,43 @@ export default class Stats extends Component {
           <div className='header'>
       <h1 className='title cool-font'>Food Review</h1>
     </div>
-    <Pie data={{
-      labels: ['Five Stars', 'Four Stars', 'Three Stars', 'Two Stars', 'One Star', 'No Stars'],
+    <Bar data={{
+      labels: ['Veggies', 'Fruit', 'Meat'],
       datasets: [
         {
-          label: '# of ratings',
-          data: [fiveStar(activities), fourStar(activities), threeStar(activities), twoStar(activities), oneStar(activities), noStar(activities)],
+          label: '5 stars',
+          data: [fiveVeg(activities), fiveFruit(activities), fiveMeat(activities)],
           backgroundColor: [
             'rgba(255, 99, 132, 0.2)',
+          ],
+        },
+        {
+          label: '4 stars',
+          data: [fourVeg(activities), fourFruit(activities), fourMeat(activities)],
+          backgroundColor: [
             'rgba(54, 162, 235, 0.2)',
+          ],
+        },
+        {
+          label: '3 stars',
+          data: [threeVeg(activities), threeFruit(activities), threeMeat(activities)],
+          backgroundColor: [
             'rgba(255, 206, 86, 0.2)',
+          ],
+        },
+        {
+          label: '2 stars',
+          data: [twoVeg(activities), twoFruit(activities), twoMeat(activities)],
+          backgroundColor: [
             'rgba(75, 192, 192, 0.2)',
+          ],
+        },
+        {
+          label: '1 stars',
+          data: [oneVeg(activities), oneFruit(activities), oneMeat(activities)],
+          backgroundColor: [
             'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)',
           ],
-          borderColor: [
-            'rgba(255, 99, 132, 1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 0.2)',
-          ],
-          borderWidth: 1,
         },
       ],
     }} />
