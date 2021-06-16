@@ -29,8 +29,9 @@ namespace Potty_Time.Controllers
         [HttpPost]
         public IActionResult AddBaby(Baby baby)
         {
-            _repo.Add(baby);
+             _repo.Add(baby);
             return Created($"api/Babies/{baby.Id}", baby);
+
         }
 
         [HttpGet("{id}")]

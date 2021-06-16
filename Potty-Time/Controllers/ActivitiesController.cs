@@ -76,7 +76,7 @@ namespace Potty_Time.Controllers
             newActivity.MealType = MealType.Poop;
             return Created($"api/Activities/{activity.Id}/poop", newActivity);
         }
-
+        
         [HttpGet("{id}/all")]
         public IActionResult GetListOfActivities(int id)
         {

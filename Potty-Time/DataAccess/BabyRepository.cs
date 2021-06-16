@@ -22,17 +22,17 @@ namespace Potty_Time.DataAccess
             return db.Query<Baby>(sql).ToList();
         }
 
-        public void Add(Baby baby)
+        public Baby Add(Baby baby)
         {
-            var sql = @"Insert into Babies(FirstName, LastName, ImageUrl,  Birthday, UserId, Age, [Description], ParentId)
-                        output inserted.Id
-                        values (@FirstName, @LastName, @ImageUrl, @Birthday, @UserId, @Age, @Description, @ParentId )";
+            var sql = @"Insert into Babies(FirstName, LastName, ImageUrl,  Birthday, UserId, [Description], ParentId)
+                        output inserted.*
+                        values (@FirstName, @LastName, @ImageUrl, @Birthday, @UserId, @Description, @ParentId )";
 
             using var db = new SqlConnection(ConnectionString);
 
-            var id = db.ExecuteScalar<int>(sql, baby);
+            var newBaby = db.QueryFirst<Baby>(sql, baby);
 
-            baby.Id = id;
+            return newBaby;
         }
 
         public Baby Get(int id)
@@ -57,7 +57,6 @@ namespace Potty_Time.DataAccess
 						ImageUrl = @imageUrl,
 						Birthday = @birthday,
 						UserId = @userId,
-						Age = @age,
                         [Description] = @description,
                         ParentId = @parentId
                         WHERE Id = @id";
@@ -98,6 +97,43 @@ namespace Potty_Time.DataAccess
             var baby = db.Query<Baby>(sql, new { id }).ToList();
 
             return baby;
+        }
+
+        public int ToAgeString(DateTime dob)
+        {
+            DateTime today = DateTime.Today;
+
+            int months = today.Month - dob.Month;
+            int years = today.Year - dob.Year;
+
+            if (today.Day < dob.Day)
+            {
+                months--;
+            }
+
+            if (months < 0)
+            {
+                years--;
+                months += 12;
+            }
+
+            int days = (today - dob.AddMonths((years * 12) + months)).Days;
+/*            var thingToReturn = years > 0 ? years : months;
+            var other = months > 0 ? months : days;*/
+            var meh = 0;
+            if (years > 0)
+            {
+                meh = years;
+            }
+            else if (months > 0)
+            {
+                meh = months;
+            }
+            else if (days > 0)
+            {
+                meh = days;
+            }
+            return meh;
         }
     }
 }

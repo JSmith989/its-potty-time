@@ -22,14 +22,12 @@ export default function MakeABaby({ user }) {
     fileRef.put(file).then((snapshot) => {
       snapshot.ref.getDownloadURL().then((image) => {
         const parsedId = Number(user.id);
-        const parsedAge = Number(data.age);
         const dataObject = {
           firstName: data.firstName,
           lastName: data.lastName,
           imageUrl: image,
           birthday: data.birthday,
           userId: parsedId,
-          age: parsedAge,
           description: data.description,
           parentId: parent
         };
@@ -51,8 +49,6 @@ export default function MakeABaby({ user }) {
       <input type="datetime-local" id="meeting-time"
        name="meeting-time"
        max="2300-06-14T00:00" {...register('birthday', { required: true })} />
-      <h5>Age</h5>
-      <input {...register('age', { required: true })} />
       <h5>Description</h5>
       <input {...register('description', { required: true })} />
       {errors.firstName && <span>This field is required</span>}
