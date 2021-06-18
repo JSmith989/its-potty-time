@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import firebase from 'firebase/app';
+import { ToastProvider } from 'react-toast-notifications';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from '../helpers/Routes';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -42,10 +43,12 @@ class App extends React.Component {
     const { user, userDetails } = this.state;
     return (
     <div className='App'>
+        <ToastProvider>
       <Router>
         <MyNav user={user} userDetails={userDetails} />
         <Routes user={user} userDetails={userDetails} />
       </Router>
+      </ToastProvider>
     </div>
     );
   }

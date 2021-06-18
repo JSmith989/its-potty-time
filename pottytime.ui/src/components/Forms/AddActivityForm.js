@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import { useForm } from 'react-hook-form';
+import { useToasts } from 'react-toast-notifications';
 import { addActivity } from '../../helpers/data/activitydata';
 import getUid from '../../helpers/data/authData';
 import { getBabies } from '../../helpers/data/babyData';
@@ -14,6 +15,7 @@ export default function EditUserForm() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { addToast } = useToasts();
   const [babies, setBabies] = useState([]);
 
   const getAllBabies = (userId) => {
@@ -49,9 +51,21 @@ export default function EditUserForm() {
           mealType: parsedMeal,
           childId: parsedChild
         };
-        console.warn(dataObject);
-        addActivity(dataObject)
-          .catch((err) => console.warn('nope', err));
+        addActivity(dataObject).then((response) => {
+          if (response) {
+            addToast('The activity has been added to the calendar!', {
+              appearance: 'success',
+              autoDismiss: true,
+            });
+          }
+        })
+          .catch((err) => {
+            console.warn('nope', err);
+            addToast('The activity has not been added', {
+              appearance: 'error',
+              autoDismiss: true,
+            });
+          });
       });
     });
   };

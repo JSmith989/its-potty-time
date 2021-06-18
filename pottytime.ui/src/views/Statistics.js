@@ -30,11 +30,14 @@ export default class Stats extends Component {
      } = this.state;
 
      return (
-      <div className="stats">
+      <div className="stats" style={{
+        backgroundColor: 'rgb(245, 252, 255)'
+      }}>
         <div className='header'>
           <h1 className='title cool-font'>Balanced Diet</h1>
         </div>
-          <Bar data={{
+          <Bar
+          data={{
             labels: ['Meats', 'Vegetables', 'Fruits'],
             datasets: [
               {
@@ -65,7 +68,8 @@ export default class Stats extends Component {
           <div className='header'>
       <h1 className='title cool-font'>Food Review</h1>
     </div>
-    <Bar data={{
+    <Bar
+    data={{
       labels: ['Veggies', 'Fruit', 'Meat'],
       datasets: [
         {

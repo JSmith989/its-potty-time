@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
+import { useToasts } from 'react-toast-notifications';
 import 'firebase/storage';
 import { useForm } from 'react-hook-form';
 import { updateActivity } from '../../helpers/data/activitydata';
@@ -12,6 +13,7 @@ export default function EditActivityForm({ activity, baby }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { addToast } = useToasts();
 
   const onSubmit = (data) => {
     const file = data.imageUrl[0];
@@ -43,6 +45,10 @@ export default function EditActivityForm({ activity, baby }) {
         };
         updateActivity(parsedId, dataObject)
           .catch((err) => console.warn('nope', err));
+        addToast('The activity has been updated!', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
       });
     });
   };
