@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
+import { useToasts } from 'react-toast-notifications';
 import 'firebase/storage';
 import { useForm } from 'react-hook-form';
 import { addBaby } from '../../helpers/data/babyData';
@@ -13,6 +14,7 @@ export default function MakeABaby({ user }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { addToast } = useToasts();
 
   const onSubmit = (data) => {
     const parent = getUid();
@@ -33,6 +35,10 @@ export default function MakeABaby({ user }) {
         };
         addBaby(dataObject)
           .catch((err) => console.warn('nope', err));
+        addToast('You made a baby!', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
       });
     });
   };

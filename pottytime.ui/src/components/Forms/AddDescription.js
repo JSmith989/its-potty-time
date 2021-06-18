@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useToasts } from 'react-toast-notifications';
 import { useForm } from 'react-hook-form';
 import { updateDescription } from '../../helpers/data/userData';
 
@@ -9,6 +10,7 @@ export default function AddDescription({ user }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { addToast } = useToasts();
 
   const onSubmit = (data) => {
     const userId = user.id;
@@ -17,8 +19,21 @@ export default function AddDescription({ user }) {
       id: parsedId,
       description: data.description
     };
-    updateDescription(userId, dataObject)
-      .catch((err) => console.warn('nope', err));
+    updateDescription(userId, dataObject).then((response) => {
+      if (response) {
+        addToast('The description has been updated!', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+      }
+    })
+      .catch((err) => {
+        console.warn('nope', err);
+        addToast('The description has not been added', {
+          appearance: 'error',
+          autoDismiss: true,
+        });
+      });
   };
 
   return (

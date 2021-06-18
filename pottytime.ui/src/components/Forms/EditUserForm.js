@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
+import { useToasts } from 'react-toast-notifications';
 import 'firebase/storage';
 import { useForm } from 'react-hook-form';
 import { updateUser } from '../../helpers/data/userData';
@@ -12,6 +13,7 @@ export default function EditUserForm({ user }) {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { addToast } = useToasts();
 
   const onSubmit = (data) => {
     const file = data.imageUrl[0];
@@ -31,6 +33,10 @@ export default function EditUserForm({ user }) {
         };
         updateUser(userId, dataObject)
           .catch((err) => console.warn('nope', err));
+        addToast('Your profile has been updated!', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
       });
     });
   };

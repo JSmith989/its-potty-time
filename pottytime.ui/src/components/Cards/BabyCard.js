@@ -4,6 +4,7 @@ import {
   Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle
 } from 'reactstrap';
+import { useToasts } from 'react-toast-notifications';
 import moment from 'moment';
 import { babyPooped } from '../../helpers/data/activitydata';
 import Modal from '../Modal';
@@ -13,6 +14,7 @@ import { getUserById } from '../../helpers/data/userData';
 
 export default function BabyCard({ baby }) {
   const [user, setUser] = useState([]);
+  const { addToast } = useToasts();
   const date = new Date(baby.birthday);
   const ageForCalc = baby.birthday;
   const handleSubmit = (e) => {
@@ -21,7 +23,12 @@ export default function BabyCard({ baby }) {
       childId: baby.id
     };
     babyPooped(obj).then((response) => {
-      console.warn(response.data);
+      if (response) {
+        addToast('The poop has been documented!', {
+          appearance: 'success',
+          autoDismiss: true,
+        });
+      }
     });
     // then take to a success message or popup
   };

@@ -62,7 +62,7 @@ export default function MyCalendar(props) {
           title: 'Dinner',
           start: new Date(activity.date),
           end: new Date(activity.date),
-          color: 'rgb(97, 132, 153)'
+          color: 'rgb(34, 56, 80)'
         });
       }
       return null;
@@ -79,6 +79,9 @@ export default function MyCalendar(props) {
   <div style={{ height: 700 }}>
     <Calendar
       popup
+      style={{
+        backgroundColor: 'rgb(163, 189, 219)'
+      }}
       components={{ toolbar: CalendarToolbar }}
       localizer={localizer}
       events={newActivity()}
